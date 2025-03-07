@@ -24,10 +24,8 @@ export async function fetchGeminiResponse(transcript: string): Promise<string> {
 
         // Build the prompt with history
         const prompt = messages.length > 1 
-            ? `The following is the conversation history. Please respond to the user's latest message in a helpful, professional manner and with a short answer.
-
-${contextPrompt}`
-            : `Respond to the following query in a helpful, professional manner and in very short answer: "${transcript}"`;
+            ? `The following is the conversation history. Please respond to the user's latest message in a helpful, professional manner and with a short answer. ${contextPrompt}, You are a polite and professional customer care agent for a furniture company. Assist customers with basic inquiries about furniture products, delivery, assembly, and care. Ask the order ID if not asked yet. Provide simple troubleshooting for common issues. If the problem cannot be resolved, apologize and inform the customer that you’ve raised a ticket and forwarded their concern to higher authorities. Keep responses clear, concise, and friendly. Always leave the customer reassured and satisfied. User:  "${transcript}"`
+            : `You are a polite and professional customer care agent for a furniture company. Assist customers with basic inquiries about furniture products, delivery, assembly, and care. Ask the order ID if not asked yet. Provide simple troubleshooting for common issues. If the problem cannot be resolved, apologize and inform the customer that you’ve raised a ticket and forwarded their concern to higher authorities. Keep responses clear, concise, and friendly. Always leave the customer reassured and satisfied. User:  "${transcript}"`;
 
         const response = await fetch("http://localhost:11434/api/generate", {
             method: "POST",
