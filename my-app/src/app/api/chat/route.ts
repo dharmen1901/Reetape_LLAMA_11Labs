@@ -8,6 +8,7 @@ import { SpeechClient } from '@google-cloud/speech';
 import fetch from "node-fetch";
 import { createWriteStream } from "fs";
 import { Buffer } from "buffer";
+import { initChatHistory } from "@/app/utils/chatHistory";
 
 // Initialize the Speech client with proper typing
 const credentials = JSON.parse(
@@ -15,6 +16,9 @@ const credentials = JSON.parse(
 );
 
 const speechClient = new SpeechClient({ credentials });
+
+initChatHistory().catch(console.error);
+
 // TTS Generation using ElevenLabs
 async function generateTTS(text: string): Promise<{ filename: string }> {
   try {
@@ -174,8 +178,6 @@ export async function POST(req: Request) {
     const modelStart = Date.now();
     const geminiResponse = await fetchGeminiResponse(transcript);
     const modelTime = Date.now() - modelStart;
-    console.log(`✓ AI response generated in ${modelTime}ms`);
-    console.log(`Response: "${geminiResponse.substring(0, 100)}${geminiResponse.length > 100 ? '...' : ''}"`);
 
     if (wantsStreaming) {
       // For streaming, return just the text and information needed for streaming
