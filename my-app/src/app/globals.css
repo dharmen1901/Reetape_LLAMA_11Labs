@@ -1,0 +1,175 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* @tailwind screens; */
+
+:root {
+  --background: #1e1e1e; /* Darker base background */
+  --foreground: #e0e0e0; /* Lighter, more readable foreground text */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #121212; /* Darker background for dark mode */
+    --foreground: #eaeaea; /* Softer light text */
+  }
+}
+
+html, body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: 'Inter', sans-serif; /* Adding a system font for better readability */
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  box-sizing: border-box; /* Ensure proper box sizing */
+}
+
+*, *::before, *::after {
+  box-sizing: inherit; /* Inherit box-sizing from html */
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@layer utilities {
+  .animate-slideUp {
+    animation: slideUp 1s ease-in-out;
+  }
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.animate-blink {
+  animation: blink 1.5s infinite;
+}
+
+@layer utilities {
+  .bg-radial-gradient {
+    background: radial-gradient(circle, rgba(36, 36, 36, 0) 10%, rgba(26, 26, 26, 0.7) 100%);
+  }
+}
+
+/* For modern browsers like Chrome, Edge, and Safari */
+::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+  height: 10px; /* Height of the scrollbar (for horizontal scroll) */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* No background for the track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #000; /* Black color for the thumb */
+  border-radius: 10px; /* Rounded edges for the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #333; /* Slightly lighter black on hover */
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin; /* Makes the scrollbar thin */
+  scrollbar-color: #000 transparent; /* Thumb color | Track color (transparent) */
+}
+
+@keyframes smoothGradientGlow {
+  0% {
+    background: linear-gradient(45deg, #fbe9f5, #d0e7f9); /* Light pastel pink to light blue */
+  }
+  25% {
+    background: linear-gradient(45deg, #f9e0f4, #c6e4f8); /* Slightly darker pink and light blue */
+  }
+  50% {
+    background: linear-gradient(45deg, #fbe9f5, #d0e7f9); /* Return to light pastel pink and blue */
+  }
+  75% {
+    background: linear-gradient(45deg, #f9e0f4, #c6e4f8); /* Subtle variation */
+  }
+  100% {
+    background: linear-gradient(45deg, #fbe9f5, #d0e7f9); /* Back to the original light pink and blue */
+  }
+}
+
+.animate-smoothGradientGlow {
+  animation: smoothGradientGlow 4s ease-in-out infinite; /* Increase the duration to 4s for smoothness */
+}
+
+@media (max-width: 425px) {
+  .custom-hide {
+    display: none;
+  }
+}
+
+
+
+.mobile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #000000;
+}
+
+.mobile-screen {
+  width: 350px;
+  height: 700px;
+  background-color: rgb(110, 96, 96);
+  border-radius: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.audio-container {
+  display: none; /* Hide the audio elements */
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.call-button, .end-button {
+  width: 100px;
+  height: 50px;
+  border-radius: 25px;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.call-button {
+  background-color: #4CAF50; /* Green */
+}
+
+.end-button {
+  background-color: #f44336; /* Red */
+}
+
+.call-button:hover {
+  background-color: #45a049;
+}
+
+.end-button:hover {
+  background-color: #e53935;
+}
